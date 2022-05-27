@@ -26,6 +26,7 @@ if sys.argv[1:]:
 else:
   port = 8083
   
+# classe che mantiene le funzioni di SimpleHTTPRequestHandler e gestisce le richieste GET dell'utente
 class ServerHandler(http.server.SimpleHTTPRequestHandler):        
     def do_GET(self):
         # Scrivo sul file AllRequestsGET le richieste dei client     
@@ -41,145 +42,142 @@ class ServerHandler(http.server.SimpleHTTPRequestHandler):
 # La funzione non Ã¨ disponibile su quel sistema operativo. Invece dobbiamo usare il
 # ThreadingTCPServer per gestire piÃ¹ richieste
 
-server = socketserver.ThreadingTCPServer(('127.0.0.1',port),ServerHandler)
+server = socketserver.ThreadingTCPServer(('127.0.0.1',port), ServerHandler)
 #header di tutte le pagine
 header_html="""
-   
 <html>
     <head>
         <style>
-  h1{
- text-align:center;
-}
-.button {
-border: none;
-color: white;
-padding: 16px 32px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-margin: 4px 2px;
-transition-duration: 0.4s;
-cursor: pointer;
-}
+      h1{
+     text-align:center;
+    }
+    .button {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    }
+    
+    .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+    }
+    
+    .button1:hover {
+    background-color: #4CAF50;
+    color: white;
+    }
+    
+    .button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+    }
+    
+    .button2:hover {
+    background-color: #008CBA;
+    color: white;
+    }
+    .button3 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #ba002e;
+    }
+    
+    .button3:hover {
+    background-color:#ba002e;
+    color: white;
+    }
+    .button4{
+    background-color: white; 
+    color: black; 
+    border: 2px solid #0f2c36;
+    }
+    
+    .button4:hover {
+    background-color: #0f2c36;
+    color: white;
+    }
+    .button5 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #ba5400;
+    }
+    
+    .button5:hover {
+    background-color: #ba5400;
+    color: white;
+    }
+    .button6 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #ba0092;
+    }
+    
+    .button6:hover {
+    background-color:#ba0092;
+    color: white;
+    }
+    .button7 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #baa700ea;
+    }
+    
+    .button7:hover {
+    background-color:  #baa700ea;
+    color: white;
+    }
+    .button8 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid  #3200ba;
+    }
+    
+    .button8:hover {
+    background-color:   #3200ba;
+    color: white;
+    }
 
-.button1 {
-background-color: white; 
-color: black; 
-border: 2px solid #4CAF50;
-}
-
-.button1:hover {
-background-color: #4CAF50;
-color: white;
-}
-
-.button2 {
-background-color: white; 
-color: black; 
-border: 2px solid #008CBA;
-}
-
-.button2:hover {
-background-color: #008CBA;
-color: white;
-}
-.button3 {
-background-color: white; 
-color: black; 
-border: 2px solid #ba002e;
-}
-
-.button3:hover {
-background-color:#ba002e;
-color: white;
-}
-.button4{
-background-color: white; 
-color: black; 
-border: 2px solid #0f2c36;
-}
-
-.button4:hover {
-background-color: #0f2c36;
-color: white;
-}
-.button5 {
-background-color: white; 
-color: black; 
-border: 2px solid #ba5400;
-}
-
-.button5:hover {
-background-color: #ba5400;
-color: white;
-}
-.button6 {
-background-color: white; 
-color: black; 
-border: 2px solid #ba0092;
-}
-
-.button6:hover {
-background-color:#ba0092;
-color: white;
-}
-.button7 {
-background-color: white; 
-color: black; 
-border: 2px solid #baa700ea;
-}
-
-.button7:hover {
-background-color:  #baa700ea;
-color: white;
-}
-.button8 {
-background-color: white; 
-color: black; 
-border: 2px solid  #3200ba;
-}
-
-.button8:hover {
-background-color:   #3200ba;
-color: white;
-}
-
-            </style>
+   </style>
     </head>
     <body>
         <title>Azienda Viaggi by Olivia</title>
-
 """
 #i bottoni del header
 nav_bar="""
  <br>
-        <a class="active" href="http://127.0.0.1:{port}">
+        <a class="active" href="http://127.0.0.1:{port}/index.html">
             <button class="button button1">Home</button>
         </a>
-        <a href="https://127.0.0.1:{port}/volo_page.html">
+        <a href="http://127.0.0.1:{port}/volo_page.html">
             <button class="button button2">voli</button>
         </a>
-        <a href="https://127.0.0.1:{port}/Hotel_page.html">
+        <a href="http://127.0.0.1:{port}/Hotel_page.html">
             <button class="button button3">Alberghi</button>
         </a>
-        <a href="https://127.0.0.1:{port}/luoghi_page.html">
+        <a href="http://127.0.0.1:{port}/luoghi_page.html">
             <button class="button button4">Luoghi turistici</button>
         </a>
-        <a href="https://127.0.0.1:{port}/meteo_page.html">
+        <a href="http://127.0.0.1:{port}/meteo_page.html">
             <button class="button button5">meteo</button>
         </a>
-        <a href="https://127.0.0.1:{port}/treno_page.html">
+        <a href="http://127.0.0.1:{port}/treno_page.html">
             <button class="button button6">orario treni</button>
         </a>
-        <a href="https://127.0.0.1:{port}/affito_page.html">
+        <a href="http://127.0.0.1:{port}/affito_page.html">
             <button class="button button7">case vacanze</button>
         </a>
         <a href="http://127.0.0.1:{port}/Relazione.pdf" download="Relazione.pdf">
             <button class="button button8">download</button>
         </a> 
-    </br>
 """.format(port=port)
 
  #il foother delle pagine
@@ -188,7 +186,7 @@ footer_html= """
     </body>
 </html>
 """
-
+ #pagina per alberghi
 albergo_body="""
 <br><br>
 		<form action="http://127.0.0.1:{port}/Hotel_page.html" method="post" style="text-align: center;">
@@ -201,6 +199,7 @@ albergo_body="""
 
 """.format(port=port)
 
+ #pagina per i voli
 volo_body="""
 <br><br>
 		<form action="http://127.0.0.1:{port}/volo_page.html" method="post" style="text-align: center;">
@@ -213,6 +212,7 @@ volo_body="""
 
 """.format(port=port)
 
+ #pagina per la meteo
 meteo_body="""
 <br><br>
 		<form action="http://127.0.0.1:{port}/meteo_page.html" method="post" style="text-align: center;">
@@ -225,7 +225,7 @@ meteo_body="""
 
 """.format(port=port)
 
-
+ #pagina per orario dei treni
 treno_body="""
 <br><br>
 		<form action="http://127.0.0.1:{port}/treno_page.html" method="post" style="text-align: center;">
@@ -238,6 +238,7 @@ treno_body="""
 
 """.format(port=port)
 
+ #pagina per i luoghi turistici
 luogo_body="""
 <br><br>
 		<form action="http://127.0.0.1:{port}/luoghi_page.html" method="post" style="text-align: center;">
@@ -250,7 +251,7 @@ luogo_body="""
 
 """.format(port=port)
 
-
+ #pagina per la locazione delle case vacanze
 casa_body="""
 <br><br>
 		<form action="http://127.0.0.1:{port}/affito_page.html" method="post" style="text-align: center;">
@@ -264,9 +265,9 @@ casa_body="""
 """.format(port=port)
 
 
-
+ #pagina per la home page
 home_body="""
-		<form action="http://127.0.0.1:{port}/home" method="post" style="text-align: center;">
+		<form action="http://127.0.0.1:{port}/index.html" method="post" style="text-align: center;">
         <h1><strong> Benvenuto nell'Agenzia di Viaggio by Olivia nell'Emilia Romagna</strong></h1>
 		  <img src='img/viaggiare-in-famiglia.png' width="500" height="300">          
           <p class=h5>L'Agenzia di Viaggio by Olivia ha per obbiettivo di aiutarvi a pianificare 
@@ -314,7 +315,8 @@ def create_index_page():
 def create_page_servizio(title,page_html,page_body):
     f = open(page_html,'w', encoding="utf-8")
     try:
-        message = header_html + title + nav_bar + page_body + footer_html
+        message = header_html + title + nav_bar + page_body 
+        message = message + footer_html
     except:
         pass
     f.write(message)
